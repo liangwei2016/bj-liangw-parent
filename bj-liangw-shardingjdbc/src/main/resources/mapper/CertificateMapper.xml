@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liangw.mapper.CertificateMapper">
+  <resultMap id="BaseResultMap" type="com.liangw.pojo.Certificate">
+    <id column="cert_id" jdbcType="BIGINT" property="certId" />
+    <result column="temp_id" jdbcType="BIGINT" property="tempId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="org_id" jdbcType="BIGINT" property="orgId" />
+    <result column="subject" jdbcType="VARCHAR" property="subject" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="hash" jdbcType="VARCHAR" property="hash" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_id_type" jdbcType="INTEGER" property="userIdType" />
+    <result column="user_number" jdbcType="VARCHAR" property="userNumber" />
+    <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="scope" jdbcType="INTEGER" property="scope" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.liangw.pojo.Certificate">
+    <result column="extention" jdbcType="LONGVARCHAR" property="extention" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    cert_id, temp_id, user_id, org_id, subject, `type`, hash, user_name, user_id_type, 
+    user_number, phone_number, `status`, `scope`, create_time, update_time
+  </sql>
+  <sql id="Blob_Column_List">
+    extention
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.liangw.pojo.CertificateExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from certificate
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.liangw.pojo.CertificateExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from certificate
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from certificate
+    where cert_id = #{certId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from certificate
+    where cert_id = #{certId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.liangw.pojo.CertificateExample">
+    delete from certificate
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.liangw.pojo.Certificate">
+    insert into certificate (cert_id, temp_id, user_id, 
+      org_id, subject, `type`, 
+      hash, user_name, user_id_type, 
+      user_number, phone_number, `status`, 
+      `scope`, create_time, update_time, 
+      extention)
+    values (#{certId,jdbcType=BIGINT}, #{tempId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
+      #{orgId,jdbcType=BIGINT}, #{subject,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{hash,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{userIdType,jdbcType=INTEGER}, 
+      #{userNumber,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{scope,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{extention,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.liangw.pojo.Certificate">
+    insert into certificate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="certId != null">
+        cert_id,
+      </if>
+      <if test="tempId != null">
+        temp_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="subject != null">
+        subject,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="hash != null">
+        hash,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="userIdType != null">
+        user_id_type,
+      </if>
+      <if test="userNumber != null">
+        user_number,
+      </if>
+      <if test="phoneNumber != null">
+        phone_number,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="scope != null">
+        `scope`,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="extention != null">
+        extention,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="certId != null">
+        #{certId,jdbcType=BIGINT},
+      </if>
+      <if test="tempId != null">
+        #{tempId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="subject != null">
+        #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="hash != null">
+        #{hash,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userIdType != null">
+        #{userIdType,jdbcType=INTEGER},
+      </if>
+      <if test="userNumber != null">
+        #{userNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null">
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="scope != null">
+        #{scope,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="extention != null">
+        #{extention,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.liangw.pojo.CertificateExample" resultType="java.lang.Long">
+    select count(*) from certificate
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update certificate
+    <set>
+      <if test="record.certId != null">
+        cert_id = #{record.certId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tempId != null">
+        temp_id = #{record.tempId,jdbcType=BIGINT},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.orgId != null">
+        org_id = #{record.orgId,jdbcType=BIGINT},
+      </if>
+      <if test="record.subject != null">
+        subject = #{record.subject,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        `type` = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.hash != null">
+        hash = #{record.hash,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userIdType != null">
+        user_id_type = #{record.userIdType,jdbcType=INTEGER},
+      </if>
+      <if test="record.userNumber != null">
+        user_number = #{record.userNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phoneNumber != null">
+        phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.scope != null">
+        `scope` = #{record.scope,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.extention != null">
+        extention = #{record.extention,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update certificate
+    set cert_id = #{record.certId,jdbcType=BIGINT},
+      temp_id = #{record.tempId,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      org_id = #{record.orgId,jdbcType=BIGINT},
+      subject = #{record.subject,jdbcType=VARCHAR},
+      `type` = #{record.type,jdbcType=INTEGER},
+      hash = #{record.hash,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      user_id_type = #{record.userIdType,jdbcType=INTEGER},
+      user_number = #{record.userNumber,jdbcType=VARCHAR},
+      phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
+      `status` = #{record.status,jdbcType=INTEGER},
+      `scope` = #{record.scope,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      extention = #{record.extention,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update certificate
+    set cert_id = #{record.certId,jdbcType=BIGINT},
+      temp_id = #{record.tempId,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      org_id = #{record.orgId,jdbcType=BIGINT},
+      subject = #{record.subject,jdbcType=VARCHAR},
+      `type` = #{record.type,jdbcType=INTEGER},
+      hash = #{record.hash,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      user_id_type = #{record.userIdType,jdbcType=INTEGER},
+      user_number = #{record.userNumber,jdbcType=VARCHAR},
+      phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
+      `status` = #{record.status,jdbcType=INTEGER},
+      `scope` = #{record.scope,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.liangw.pojo.Certificate">
+    update certificate
+    <set>
+      <if test="tempId != null">
+        temp_id = #{tempId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="subject != null">
+        subject = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="hash != null">
+        hash = #{hash,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userIdType != null">
+        user_id_type = #{userIdType,jdbcType=INTEGER},
+      </if>
+      <if test="userNumber != null">
+        user_number = #{userNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null">
+        phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="scope != null">
+        `scope` = #{scope,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="extention != null">
+        extention = #{extention,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where cert_id = #{certId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.liangw.pojo.Certificate">
+    update certificate
+    set temp_id = #{tempId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      org_id = #{orgId,jdbcType=BIGINT},
+      subject = #{subject,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=INTEGER},
+      hash = #{hash,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_id_type = #{userIdType,jdbcType=INTEGER},
+      user_number = #{userNumber,jdbcType=VARCHAR},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=INTEGER},
+      `scope` = #{scope,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      extention = #{extention,jdbcType=LONGVARCHAR}
+    where cert_id = #{certId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.liangw.pojo.Certificate">
+    update certificate
+    set temp_id = #{tempId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      org_id = #{orgId,jdbcType=BIGINT},
+      subject = #{subject,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=INTEGER},
+      hash = #{hash,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_id_type = #{userIdType,jdbcType=INTEGER},
+      user_number = #{userNumber,jdbcType=VARCHAR},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=INTEGER},
+      `scope` = #{scope,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where cert_id = #{certId,jdbcType=BIGINT}
+  </update>
+</mapper>
