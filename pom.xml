@@ -13,19 +13,20 @@
     <artifactId>bj-liangw-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>bj-liangw-parent</name>
+    <packaging>pom</packaging>
 
     <properties>
         <java.version>1.8</java.version>
     </properties>
     <modules>
         <module>bj-liangw-common</module>
+        <module>bj-liangw-gateway</module>
+        <module>bj-liangw-security</module>
+        <module>bj-liangw-shardingjdbc</module>
+        <module>bj-liangw-ofd</module>
     </modules>
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-web</artifactId>
-            </dependency>
             <!--hutool-->
             <dependency>
                 <groupId>cn.hutool</groupId>
@@ -40,7 +41,7 @@
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
-                <optional>true</optional>
+                <version>1.16.20</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
