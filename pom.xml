@@ -19,11 +19,13 @@
         <java.version>1.8</java.version>
     </properties>
     <modules>
-        <module>bj-liangw-common</module>
-        <module>bj-liangw-gateway</module>
-        <module>bj-liangw-security</module>
-        <module>bj-liangw-shardingjdbc</module>
-        <module>bj-liangw-ofd</module>
+<!--        <module>bj-liangw-common</module>-->
+<!--        <module>bj-liangw-gateway</module>-->
+<!--        <module>bj-liangw-security</module>-->
+<!--        <module>bj-liangw-shardingjdbc</module>-->
+<!--        <module>bj-liangw-ofd</module>-->
+<!--        <module>bj-liangw-init</module>-->
+        <module>bj-liangw-activity</module>
     </modules>
     <dependencyManagement>
         <dependencies>

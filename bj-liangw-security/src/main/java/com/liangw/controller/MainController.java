@@ -4,6 +4,8 @@ package com.liangw.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 /**
  * @ClassName MainController
  * @Description TODO
@@ -29,7 +31,7 @@ public class MainController {
     }
 
     @RequestMapping("/login")
-    public String login() {
+    public @ResponseBody  String login() {
         return "login";
     }
 

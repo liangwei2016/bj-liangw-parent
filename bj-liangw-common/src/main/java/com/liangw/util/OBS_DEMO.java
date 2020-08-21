@@ -6,7 +6,6 @@ import com.obs.services.model.HeaderResponse;
 import com.obs.services.model.ObsBucket;
 import com.obs.services.model.ObsObject;
 import com.obs.services.model.PutObjectResult;
-
 import javax.imageio.stream.FileImageOutputStream;
 import java.io.*;
 
