@@ -1,0 +1,7 @@
+server:
+  port: 9999
+shiro:
+  loginUrl : /login.html
+  userNativeSessionManager: true  # Let Shiro Manage the sessions
+  sessionManager:
+    sessionIdUrlRewritingEnabled: false  # disable URL session rewriting
