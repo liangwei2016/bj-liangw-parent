@@ -1,0 +1,15 @@
+server:
+  port: 3000
+#--------------------------rabbitmq--------------------------
+spring:
+  rabbitmq:
+    addresses: 124.70.167.150:5672
+    username: admin
+    password: admin
+    virtual-host: /
+
+#-------------------------附件存储-------------------------
+MQ:
+  QUEUE_ONE: swatch.one.request  #单个队列设置
+  DIRECT_EXCHANGE_ONE: swatch.one #交换机
+  ROUTING_KEY_ONE: one  # 路由键

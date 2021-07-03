@@ -1,0 +1,25 @@
+server:
+  port: 9999
+
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClass: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/cert_dev?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=PRC&useSSL=false&autoReconnect=true
+    username: root
+    password: root
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+
+SYS:
+  OBS:
+    AK: IO0R2E4XQZDJMGMJ1UKY
+    SK: RZ34wSaKqlmgSzRpLs7WSy4TtWqkaPsmY7UGEN9L
+    END_POINT: https://obs.cn-north-4.myhuaweicloud.com
+    BUCKET_NAME: eidc2020
+    BUCKET_FILE_NAME: demoeidc
+
+logging:
+  level:
+    com.ct.service.template.dao: trace
