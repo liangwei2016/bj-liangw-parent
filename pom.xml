@@ -25,7 +25,8 @@
 <!--        <module>bj-liangw-shardingjdbc</module>-->
 <!--        <module>bj-liangw-ofd</module>-->
 <!--        <module>bj-liangw-init</module>-->
-        <module>bj-liangw-activity</module>
+<!--        <module>bj-liangw-activity</module>-->
+        <module>bj-liangw-rabbitmq</module>
     </modules>
     <dependencyManagement>
         <dependencies>
