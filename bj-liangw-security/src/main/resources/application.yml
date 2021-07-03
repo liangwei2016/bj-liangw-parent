@@ -1,0 +1,11 @@
+server:
+  port: 8989
+#--------------------------rabbitmq--------------------------
+spring:
+  rabbitmq:
+#    addresses: 117.78.2.197:5672
+    addresses: 192.168.1.98:5672
+#    addresses: 127.0.0.1:5672
+    username: ez
+    password: ez
+    virtual-host: /
